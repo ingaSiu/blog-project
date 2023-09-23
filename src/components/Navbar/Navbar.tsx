@@ -1,27 +1,42 @@
 import { Link } from 'react-router-dom';
+import { LinksProps } from '../../layouts/MainLayout';
+import MobileMenu from '../MobileMenu/MobileMenu';
 import logo from '../../../public/cat_icon.png';
 import styles from './Navbar.module.scss';
 
-const Navbar = () => {
+type NavbarProps = {
+  links: LinksProps[];
+  homeLink: string;
+};
+
+const Navbar = ({ links, homeLink }: NavbarProps) => {
   return (
     <>
       <div className={styles.navWrapper}>
         {/* // logo for mobile */}
-        <Link to={'/'}>
-          <img className={styles.smallLogo} src={logo} alt="Small logo" />
+        <Link to={homeLink}>
+          <img className={styles.smallLogo} src={logo} alt="Small logo" width={60} />
         </Link>
 
         <div className={styles.bigLogo}>
-          <Link to={'/'}>
-            <img src={logo} alt="Logo" />
+          <Link to={homeLink}>
+            <div className={styles.logoWrapper}>
+              <img src={logo} alt="Logo" />
+            </div>
+
             <p className={styles.blogTitle}>Nekotastic Blog</p>
           </Link>
         </div>
 
-        <div className={styles.navLinks}>
-          <a href="/">Recipes</a>
-          <a href="#">Blog</a>
+        <div className={styles.navLinksWapper}>
+          {links.map((item) => (
+            <Link key={item.path} to={item.path} className={styles.navbarLink}>
+              {item.title}
+            </Link>
+          ))}
         </div>
+
+        <MobileMenu links={links} />
       </div>
     </>
   );
