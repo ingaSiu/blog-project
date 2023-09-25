@@ -18,15 +18,15 @@ const Navbar = ({ links, homeLink }: NavbarProps) => {
           <img className={styles.smallLogo} src={logo} alt="Small logo" width={60} />
         </Link>
 
-        <div className={styles.bigLogo}>
-          <Link to={homeLink}>
+        <Link to={homeLink}>
+          <div className={styles.bigLogo}>
             <div className={styles.logoWrapper}>
               <img src={logo} alt="Logo" />
             </div>
 
             <p className={styles.blogTitle}>Nekotastic Blog</p>
-          </Link>
-        </div>
+          </div>
+        </Link>
 
         <div className={styles.navLinksWapper}>
           {links.map((item) => (
